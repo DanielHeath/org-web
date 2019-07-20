@@ -21,6 +21,7 @@ import { setDisappearingLoadingMessage } from './actions/base';
 
 import createDropboxSyncBackendClient from './sync_backend_clients/dropbox_sync_backend_client';
 import createGoogleDriveSyncBackendClient from './sync_backend_clients/google_drive_sync_backend_client';
+import createCowyoBackendClient from './sync_backend_clients/cowyo_sync_backend_client';
 
 import './base.css';
 
@@ -67,6 +68,15 @@ export default class App extends PureComponent {
           break;
         case 'Google Drive':
           client = createGoogleDriveSyncBackendClient();
+          initialState.syncBackend = Map({
+            isAuthenticated: true,
+            client,
+          });
+          break;
+        case 'Cowyo':
+          const cowyoRootUrl = getPersistedField('cowyoRootUrl', true);
+          const cowyoAuth = getPersistedField('cowyoAuth', true);
+          client = createCowyoBackendClient(cowyoRootUrl, cowyoAuth);
           initialState.syncBackend = Map({
             isAuthenticated: true,
             client,

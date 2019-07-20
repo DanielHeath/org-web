@@ -248,6 +248,9 @@ export const loadSettingsFromConfigFile = (dispatch, getState) => {
         'root'
       );
       break;
+    case 'Cowyo':
+      fileContentsPromise = syncBackendClient.getFileContents('org-web-config-json');
+      break;
     default:
   }
 

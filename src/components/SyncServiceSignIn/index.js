@@ -6,6 +6,7 @@ import './stylesheet.css';
 
 import DropboxLogo from './dropbox.svg';
 import GoogleDriveLogo from './google_drive.png';
+import CowyoLogo from './cowyo.png';
 
 import { persistField } from '../../util/settings_persister';
 
@@ -55,6 +56,12 @@ export default class SyncServiceSignIn extends PureComponent {
     }
   }
 
+  handleCowyoClick() {
+    persistField('authenticatedSyncService', 'Cowyo');
+    persistField('cowyoRootUrl', prompt("Cowyo root URL"));
+    persistField('cowyoAuth', prompt("access code, if required"));
+  }
+
   render() {
     return (
       <div className="sync-service-sign-in-container">
@@ -69,6 +76,10 @@ export default class SyncServiceSignIn extends PureComponent {
 
         <div className="sync-service-container" onClick={this.handleGoogleDriveClick}>
           <img src={GoogleDriveLogo} alt="Google Drive logo" className="google-drive-logo" />
+        </div>
+
+        <div className="sync-service-container" onClick={this.handleCowyoClick}>
+          <img src={CowyoLogo} alt="Cowyo logo" className="cowyo-logo" />
         </div>
       </div>
     );

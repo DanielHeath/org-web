@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import googleAnalyticsLogger from './middleware/google_analytics_logging';
 import liveSync from './middleware/live_sync';
 import rootReducer from './reducers';
 
@@ -10,5 +9,5 @@ export default initialState =>
   createStore(
     rootReducer,
     initialState,
-    composeEnhancers(applyMiddleware(thunk, googleAnalyticsLogger, liveSync))
+    composeEnhancers(applyMiddleware(thunk, liveSync))
   );
